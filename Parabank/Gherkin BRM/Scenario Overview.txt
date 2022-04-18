@@ -1,0 +1,32 @@
+FEATURE : <please specify>
+-----------------------------
+SCENARIO 1: Username = "invalid Username"
+
+Similar scenarios with different data set
+Case 1:
+Username = "invalid Username"
+Password = "invalid Password"
+Adminstritation
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'Valid Register' / Action #2
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'Invalid Register' / Action #2
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'username exist' / Action #2
+Reject non matching password
+Forgot Password
+Accounts Overview
+All Fileds are required and should not be empty
+Bill Pay Amount should be less than the account balance
+Bill Payment Successfull and amount debit from account balance
+Account number and Verify Account number should match
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'Successfull Transfer' / Action #2
+From date and To date are required
+Transaction ID is required
+Date is required
+Amount is Required
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'Update Contact' / Action #2
+Node Activity 'Request Loan'
+Find Transaction by Date Range
+Find Transaction by ID
+Find Transaction by Date
+Find Transaction by Amount
+Open New Account and Requesting Loan
+

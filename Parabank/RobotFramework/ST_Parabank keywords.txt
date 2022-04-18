@@ -1,0 +1,789 @@
+*** Settings ***
+Documentation    WARNING! This file has been automatically generated using the Conformiq <Robot Framework Scripter> scripting backend. PLEASE DO NOT EDIT.
+Library    Selenium2Library
+Resource          Conformiq RobotFwk Utils library.txt
+*** Keywords ***
+Activity Node 1 Parabank - 
+    [Arguments]    ${url FIELD}    
+      ${PERFORM enter URL-url FIELD_locator}      Load Excel Data    Objects    PERFORM enter URL-url FIELD_locator      Locator
+
+
+
+    Input Text		${PERFORM enter URL-url FIELD_locator}     ${url FIELD}
+
+
+
+LOGIN Parabank - 
+    [Arguments]    ${Password TEXTBOX}    ${Username TEXTBOX}    
+      ${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMPasswordTEXTBOX_locator}      Load Excel Data    Objects    Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMPasswordTEXTBOX_locator      Locator
+      ${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMUsernameTEXTBOX_locator}      Load Excel Data    Objects    Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMUsernameTEXTBOX_locator      Locator
+      ${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMLOG INBUTTON_locator}      Load Excel Data    Objects    Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMLOG INBUTTON_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMPasswordTEXTBOX_locator}     5
+    Input Text		${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMPasswordTEXTBOX_locator}     ${Password TEXTBOX}
+    Wait Until Element Is Visible 		${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMUsernameTEXTBOX_locator}     5
+    Input Text		${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMUsernameTEXTBOX_locator}     ${Username TEXTBOX}
+    Wait Until Element Is Visible 		${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMLOG INBUTTON_locator}     5
+    Click Element		${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMLOG INBUTTON_locator}     
+
+
+
+Invalid Login Parabank - 
+    [Arguments]    ${message FIELD Verification}    
+      ${VERIFY Invalid Credentials-message FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Invalid Credentials-message FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Invalid Credentials-message FIELD [Verification]_locator}     ${message FIELD Verification}message FIELD [Verification]     
+    Element Should Contain		${VERIFY Invalid Credentials-message FIELD [Verification]_locator}     ${message FIELD Verification}message FIELD [Verification]     
+    #Req:Invalid Login when user enters username which does not exist.
+
+	# No CITA mapping found for: Invalid Credentials #pv#The username
+	# No CITA mapping found for: password could not be verified.#pv##newparam#
+	# No CITA mapping found for: password could not be verified.#pv#
+
+
+Admin Page Parabank - 
+    [Arguments]    ${Threshold TEXTBOX Verification}    ${Initial Balance TEXTBOX Verification}    ${Min Balance TEXTBOX Verification}    ${Loan Provider DROPDOWN}    ${Loan Processor DROPDOWN}    ${Threshold TEXTBOX}    ${Initial Balance TEXTBOX}    ${Min Balance TEXTBOX}    ${Error FIELD Verification}    
+      ${Parabank Welcome-Parabank WelcomeSCREENParabank WelcomeSCREENAdmin PageHYPERLINK_locator}      Load Excel Data    Objects    Parabank Welcome-Parabank WelcomeSCREENParabank WelcomeSCREENAdmin PageHYPERLINK_locator      Locator
+      ${Administration-AdministrationSCREENApplication SettingFORMThresholdTEXTBOX_locator}      Load Excel Data    Objects    Administration-AdministrationSCREENApplication SettingFORMThresholdTEXTBOX_locator      Locator
+      ${Administration-AdministrationSCREENApplication SettingFORMInitial BalanceTEXTBOX_locator}      Load Excel Data    Objects    Administration-AdministrationSCREENApplication SettingFORMInitial BalanceTEXTBOX_locator      Locator
+      ${Administration-AdministrationSCREENApplication SettingFORMMin BalanceTEXTBOX_locator}      Load Excel Data    Objects    Administration-AdministrationSCREENApplication SettingFORMMin BalanceTEXTBOX_locator      Locator
+      ${Administration-AdministrationSCREENApplication SettingFORMLoan ProviderDROPDOWN_locator}      Load Excel Data    Objects    Administration-AdministrationSCREENApplication SettingFORMLoan ProviderDROPDOWN_locator      Locator
+      ${Administration-AdministrationSCREENApplication SettingFORMLoan ProcessorDROPDOWN_locator}      Load Excel Data    Objects    Administration-AdministrationSCREENApplication SettingFORMLoan ProcessorDROPDOWN_locator      Locator
+      ${Administration-AdministrationSCREENSUBMITBUTTON_locator}      Load Excel Data    Objects    Administration-AdministrationSCREENSUBMITBUTTON_locator      Locator
+      ${VERIFY Transaction Error -Error FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Error -Error FIELD [Verification]_locator      Locator
+
+
+
+    Click Element		${Parabank Welcome-Parabank WelcomeSCREENParabank WelcomeSCREENAdmin PageHYPERLINK_locator}     
+    Page Should Contain		${Threshold TEXTBOX Verification}
+    Page Should Contain		${Initial Balance TEXTBOX Verification}
+    Page Should Contain		${Min Balance TEXTBOX Verification}
+    Wait Until Element Is Visible 		${Administration-AdministrationSCREENApplication SettingFORMLoan ProviderDROPDOWN_locator}     5
+    Select From List By Label		${Administration-AdministrationSCREENApplication SettingFORMLoan ProviderDROPDOWN_locator}     ${Loan Provider DROPDOWN}
+    Wait Until Element Is Visible 		${Administration-AdministrationSCREENApplication SettingFORMLoan ProcessorDROPDOWN_locator}     5
+    Select From List By Label		${Administration-AdministrationSCREENApplication SettingFORMLoan ProcessorDROPDOWN_locator}     ${Loan Processor DROPDOWN}
+    Wait Until Element Is Visible 		${Administration-AdministrationSCREENApplication SettingFORMThresholdTEXTBOX_locator}     5
+    Input Text		${Administration-AdministrationSCREENApplication SettingFORMThresholdTEXTBOX_locator}     ${Threshold TEXTBOX}
+    Wait Until Element Is Visible 		${Administration-AdministrationSCREENApplication SettingFORMInitial BalanceTEXTBOX_locator}     5
+    Input Text		${Administration-AdministrationSCREENApplication SettingFORMInitial BalanceTEXTBOX_locator}     ${Initial Balance TEXTBOX}
+    Wait Until Element Is Visible 		${Administration-AdministrationSCREENApplication SettingFORMMin BalanceTEXTBOX_locator}     5
+    Input Text		${Administration-AdministrationSCREENApplication SettingFORMMin BalanceTEXTBOX_locator}     ${Min Balance TEXTBOX}
+    Wait Until Element Is Visible 		${Administration-AdministrationSCREENSUBMITBUTTON_locator}     5
+    Click Element		${Administration-AdministrationSCREENSUBMITBUTTON_locator}     
+    Element Should Contain		${VERIFY Transaction Error -Error FIELD [Verification]_locator}     ${Error FIELD Verification}Error FIELD [Verification]     
+    #Req:Adminstritation
+
+
+
+REGISTER Parabank - 
+    [Arguments]    ${First Name TEXTBOX}    ${Last Name TEXTBOX}    ${Address TEXTBOX}    ${City TEXTBOX}    ${State TEXTBOX}    ${Zip Code TEXTBOX}    ${Phone TEXTBOX}    ${SSN TEXTBOX}    ${Username TEXTBOX}    ${Password TEXTBOX}    ${Confirm TEXTBOX}    
+      ${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMParabank WelcomeSCREENCustomer LoginFORMRegisterHYPERLINK_locator}      Load Excel Data    Objects    Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMParabank WelcomeSCREENCustomer LoginFORMRegisterHYPERLINK_locator      Locator
+      ${Register-RegisterSCREENSignupFORMFirst NameTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMFirst NameTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMLast NameTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMLast NameTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMAddressTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMAddressTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMCityTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMCityTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMStateTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMStateTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMZip CodeTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMZip CodeTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMPhoneTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMPhoneTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMSSNTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMSSNTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMUsernameTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMUsernameTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMPasswordTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMPasswordTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMConfirmTEXTBOX_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMConfirmTEXTBOX_locator      Locator
+      ${Register-RegisterSCREENSignupFORMRIGISTERBUTTON_locator}      Load Excel Data    Objects    Register-RegisterSCREENSignupFORMRIGISTERBUTTON_locator      Locator
+
+
+
+    Click Element		${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMParabank WelcomeSCREENCustomer LoginFORMRegisterHYPERLINK_locator}     
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMFirst NameTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMFirst NameTEXTBOX_locator}     ${First Name TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMLast NameTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMLast NameTEXTBOX_locator}     ${Last Name TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMAddressTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMAddressTEXTBOX_locator}     ${Address TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMCityTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMCityTEXTBOX_locator}     ${City TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMStateTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMStateTEXTBOX_locator}     ${State TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMZip CodeTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMZip CodeTEXTBOX_locator}     ${Zip Code TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMPhoneTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMPhoneTEXTBOX_locator}     ${Phone TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMSSNTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMSSNTEXTBOX_locator}     ${SSN TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMUsernameTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMUsernameTEXTBOX_locator}     ${Username TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMPasswordTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMPasswordTEXTBOX_locator}     ${Password TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMConfirmTEXTBOX_locator}     5
+    Input Text		${Register-RegisterSCREENSignupFORMConfirmTEXTBOX_locator}     ${Confirm TEXTBOX}
+    Wait Until Element Is Visible 		${Register-RegisterSCREENSignupFORMRIGISTERBUTTON_locator}     5
+    Click Element		${Register-RegisterSCREENSignupFORMRIGISTERBUTTON_locator}     
+
+
+
+Valid Register Parabank - 
+    [Arguments]    ${message FIELD Verification}    
+      ${VERIFY Account Created-message FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Created-message FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Account Created-message FIELD [Verification]_locator}     ${message FIELD Verification}message FIELD [Verification]     
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'Valid Register' / Action #2
+
+	# No CITA mapping found for: Account Created #pv#Account Created Successfully
+	# No CITA mapping found for: you are now logged in#pv##newparam#
+	# No CITA mapping found for: you are now logged in#pv#
+
+
+Invalid Register Parabank - 
+    [Arguments]    ${First Name FIELD Verification}    ${Last Name FIELD Verification}    ${Adress FIELD Verification}    ${City FIELD Verification}    ${State FIELD Verification}    ${Zip Code FIELD Verification}    ${Phone FIELD Verification}    ${SSN FIELD Verification}    ${UserName FIELD Verification}    ${Password FIELD Verification}    ${Confirm FIELD Verification}    
+      ${VERIFY Reject Register-First Name FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-First Name FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-Last Name FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-Last Name FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-Adress FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-Adress FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-City FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-City FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-State FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-State FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-Zip Code FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-Zip Code FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-Phone FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-Phone FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-SSN FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-SSN FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-UserName FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-UserName FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-Password FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-Password FIELD [Verification]_locator      Locator
+      ${VERIFY Reject Register-Confirm FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Reject Register-Confirm FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Reject Register-First Name FIELD [Verification]_locator}     ${First Name FIELD Verification}First Name FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-Last Name FIELD [Verification]_locator}     ${Last Name FIELD Verification}Last Name FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-Adress FIELD [Verification]_locator}     ${Adress FIELD Verification}Adress FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-City FIELD [Verification]_locator}     ${City FIELD Verification}City FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-State FIELD [Verification]_locator}     ${State FIELD Verification}State FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-Zip Code FIELD [Verification]_locator}     ${Zip Code FIELD Verification}Zip Code FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-Phone FIELD [Verification]_locator}     ${Phone FIELD Verification}Phone FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-SSN FIELD [Verification]_locator}     ${SSN FIELD Verification}SSN FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-UserName FIELD [Verification]_locator}     ${UserName FIELD Verification}UserName FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-Password FIELD [Verification]_locator}     ${Password FIELD Verification}Password FIELD [Verification]     
+    Element Should Contain		${VERIFY Reject Register-Confirm FIELD [Verification]_locator}     ${Confirm FIELD Verification}Confirm FIELD [Verification]     
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'Invalid Register' / Action #2
+
+
+
+name exist Parabank - 
+    [Arguments]    ${Invalid Register FIELD Verification}    
+      ${VERIFY Invalid Register-Invalid Register FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Invalid Register-Invalid Register FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Invalid Register-Invalid Register FIELD [Verification]_locator}     ${Invalid Register FIELD Verification}Invalid Register FIELD [Verification]     
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'username exist' / Action #2
+
+
+
+non matching password Parabank - 
+    [Arguments]    ${Invalid Register FIELD Verification}    
+      ${VERIFY Invalid Register-Invalid Register FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Invalid Register-Invalid Register FIELD [Verification]_locator      Locator
+      ${VERIFY Invalid Register-Confirm Passwordsame#pv##newparam#_locator}      Load Excel Data    Objects    VERIFY Invalid Register-Confirm Passwordsame#pv##newparam#_locator      Locator
+      ${VERIFY Invalid Register-Invalid Register_locator}      Load Excel Data    Objects    VERIFY Invalid Register-Invalid Register_locator      Locator
+      ${VERIFY Invalid Register-Confirm Passwordsame#pv#_locator}      Load Excel Data    Objects    VERIFY Invalid Register-Confirm Passwordsame#pv#_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Invalid Register-Invalid Register FIELD [Verification]_locator}     ${Invalid Register FIELD Verification}Invalid Register FIELD [Verification]     
+    Page Should Contain Element		
+    Page Should Contain Element		${Invalid Register FIELD Verification}
+    Page Should Contain Element		
+    #Req:Reject non matching password
+
+	# No CITA mapping found for: Invalid Register #pv#Password
+	# No CITA mapping found for: Confirm Password should be same#pv##newparam#
+	# No CITA mapping found for: Confirm Password should be same#pv#
+
+
+Forgot Login info Parabank - 
+    [Arguments]    ${First Name TEXTBOX}    ${Last Name TEXTBOX}    ${Address TEXTBOX}    ${City TEXTBOX}    ${State TEXTBOX}    ${Zip Code TEXTBOX}    ${SSN TEXTBOX}    ${Error FIELD Verification}    
+      ${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMParabank WelcomeSCREENCustomer LoginFORMForgot login info?HYPERLINK_locator}      Load Excel Data    Objects    Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMParabank WelcomeSCREENCustomer LoginFORMForgot login info?HYPERLINK_locator      Locator
+      ${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMFirst NameTEXTBOX_locator}      Load Excel Data    Objects    Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMFirst NameTEXTBOX_locator      Locator
+      ${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMLast NameTEXTBOX_locator}      Load Excel Data    Objects    Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMLast NameTEXTBOX_locator      Locator
+      ${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMAddressTEXTBOX_locator}      Load Excel Data    Objects    Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMAddressTEXTBOX_locator      Locator
+      ${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMCityTEXTBOX_locator}      Load Excel Data    Objects    Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMCityTEXTBOX_locator      Locator
+      ${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMStateTEXTBOX_locator}      Load Excel Data    Objects    Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMStateTEXTBOX_locator      Locator
+      ${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMZip CodeTEXTBOX_locator}      Load Excel Data    Objects    Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMZip CodeTEXTBOX_locator      Locator
+      ${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMSSNTEXTBOX_locator}      Load Excel Data    Objects    Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMSSNTEXTBOX_locator      Locator
+      ${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMFIND MY LOGIN INFOBUTTON_locator}      Load Excel Data    Objects    Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMFIND MY LOGIN INFOBUTTON_locator      Locator
+      ${VERIFY Transaction Error -Error FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Error -Error FIELD [Verification]_locator      Locator
+
+
+
+    Click Element		${Parabank Welcome-Parabank WelcomeSCREENCustomer LoginFORMParabank WelcomeSCREENCustomer LoginFORMForgot login info?HYPERLINK_locator}     
+    Wait Until Element Is Visible 		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMFirst NameTEXTBOX_locator}     5
+    Input Text		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMFirst NameTEXTBOX_locator}     ${First Name TEXTBOX}
+    Wait Until Element Is Visible 		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMLast NameTEXTBOX_locator}     5
+    Input Text		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMLast NameTEXTBOX_locator}     ${Last Name TEXTBOX}
+    Wait Until Element Is Visible 		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMAddressTEXTBOX_locator}     5
+    Input Text		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMAddressTEXTBOX_locator}     ${Address TEXTBOX}
+    Wait Until Element Is Visible 		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMCityTEXTBOX_locator}     5
+    Input Text		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMCityTEXTBOX_locator}     ${City TEXTBOX}
+    Wait Until Element Is Visible 		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMStateTEXTBOX_locator}     5
+    Input Text		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMStateTEXTBOX_locator}     ${State TEXTBOX}
+    Wait Until Element Is Visible 		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMZip CodeTEXTBOX_locator}     5
+    Input Text		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMZip CodeTEXTBOX_locator}     ${Zip Code TEXTBOX}
+    Wait Until Element Is Visible 		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMSSNTEXTBOX_locator}     5
+    Input Text		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMSSNTEXTBOX_locator}     ${SSN TEXTBOX}
+    Wait Until Element Is Visible 		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMFIND MY LOGIN INFOBUTTON_locator}     5
+    Click Element		${Forgot Login info-Forgot Login infoSCREENForgot Login infoFORMFIND MY LOGIN INFOBUTTON_locator}     
+    Element Should Contain		${VERIFY Transaction Error -Error FIELD [Verification]_locator}     ${Error FIELD Verification}Error FIELD [Verification]     
+    #Req:Forgot Password
+
+
+
+Valid Login Parabank - 
+    [Arguments]    ${Account FIELD Verification}    ${Balance FIELD Verification}    ${Available Amount FIELD Verification}    
+      ${VERIFY Accounts Overview-Account FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Accounts Overview-Account FIELD [Verification]_locator      Locator
+      ${VERIFY Accounts Overview-Balance FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Accounts Overview-Balance FIELD [Verification]_locator      Locator
+      ${VERIFY Accounts Overview-Available Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Accounts Overview-Available Amount FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Accounts Overview-Account FIELD [Verification]_locator}     ${Account FIELD Verification}Account FIELD [Verification]     
+    Element Should Contain		${VERIFY Accounts Overview-Balance FIELD [Verification]_locator}     ${Balance FIELD Verification}Balance FIELD [Verification]     
+    Element Should Contain		${VERIFY Accounts Overview-Available Amount FIELD [Verification]_locator}     ${Available Amount FIELD Verification}Available Amount FIELD [Verification]     
+
+
+
+Accounts Overivew Parabank - 
+    [Arguments]    ${Account FIELD Verification}    ${Balance FIELD Verification}    ${Available Amount FIELD Verification}    
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENAccount OverviewHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENAccount OverviewHYPERLINK_locator      Locator
+      ${VERIFY Accounts Overview-Account FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Accounts Overview-Account FIELD [Verification]_locator      Locator
+      ${VERIFY Accounts Overview-Balance FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Accounts Overview-Balance FIELD [Verification]_locator      Locator
+      ${VERIFY Accounts Overview-Available Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Accounts Overview-Available Amount FIELD [Verification]_locator      Locator
+
+
+
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENAccount OverviewHYPERLINK_locator}     
+    Element Should Contain		${VERIFY Accounts Overview-Account FIELD [Verification]_locator}     ${Account FIELD Verification}Account FIELD [Verification]     
+    Element Should Contain		${VERIFY Accounts Overview-Balance FIELD [Verification]_locator}     ${Balance FIELD Verification}Balance FIELD [Verification]     
+    Element Should Contain		${VERIFY Accounts Overview-Balance FIELD [Verification]_locator}     ${Balance FIELD Verification}Balance FIELD [Verification]     
+    Element Should Contain		${VERIFY Accounts Overview-Available Amount FIELD [Verification]_locator}     ${Available Amount FIELD Verification}Available Amount FIELD [Verification]     
+    Element Should Contain		${VERIFY Accounts Overview-Available Amount FIELD [Verification]_locator}     ${Available Amount FIELD Verification}Available Amount FIELD [Verification]     
+    #Req:Accounts Overview
+
+	# No CITA mapping found for: Accounts Overview #pv#Account Overview screen displays with Account Number
+	# No CITA mapping found for: #pv#
+	# No CITA mapping found for: #pv#Balance
+	# No CITA mapping found for: and#newparam#
+	# No CITA mapping found for: and#pv#
+
+
+Bill Pay Parabank - 
+    [Arguments]    ${Payee Name TEXTBOX}    ${Address TEXTBOX}    ${City TEXTBOX}    ${State TEXTBOX}    ${Zip Code TEXTBOX}    ${Phone TEXTBOX}    ${Account TEXTBOX}    ${Verify Account TEXTBOX}    ${Amount TEXTBOX}    ${From Account DROPDOWN}    
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENBill PayHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENBill PayHYPERLINK_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMPayee NameTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMPayee NameTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAddressTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAddressTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMCityTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMCityTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMStateTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMStateTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMZip CodeTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMZip CodeTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMPhoneTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMPhoneTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAccountTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAccountTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMVerify AccountTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMVerify AccountTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAmountTEXTBOX_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAmountTEXTBOX_locator      Locator
+      ${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMFrom AccountDROPDOWN_locator}      Load Excel Data    Objects    Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMFrom AccountDROPDOWN_locator      Locator
+
+
+
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENBill PayHYPERLINK_locator}     
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMPayee NameTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMPayee NameTEXTBOX_locator}     ${Payee Name TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAddressTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAddressTEXTBOX_locator}     ${Address TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMCityTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMCityTEXTBOX_locator}     ${City TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMStateTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMStateTEXTBOX_locator}     ${State TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMZip CodeTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMZip CodeTEXTBOX_locator}     ${Zip Code TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMPhoneTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMPhoneTEXTBOX_locator}     ${Phone TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAccountTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAccountTEXTBOX_locator}     ${Account TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMVerify AccountTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMVerify AccountTEXTBOX_locator}     ${Verify Account TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAmountTEXTBOX_locator}     5
+    Input Text		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMAmountTEXTBOX_locator}     ${Amount TEXTBOX}
+    Wait Until Element Is Visible 		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMFrom AccountDROPDOWN_locator}     5
+    Select From List By Label		${Bill Payment Service-Bill Payment ServiceSCREENPayee InformationFORMFrom AccountDROPDOWN_locator}     ${From Account DROPDOWN}
+
+
+
+Successful Bill Payment Parabank - 
+    [Arguments]    ${Bill Payment FIELD Verification}    
+      ${VERIFY Bill Payment Complete-Bill Payment FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Bill Payment Complete-Bill Payment FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Bill Payment Complete-Bill Payment FIELD [Verification]_locator}     ${Bill Payment FIELD Verification}Bill Payment FIELD [Verification]     
+    #Req:All Fileds are required and should not be empty
+
+
+
+Transfer funds Parabank - 
+    [Arguments]    ${Amount TEXTBOX}    ${From Account DROPDOWN}    ${To Account DROPDOWN}    
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENTransfer FundsHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENTransfer FundsHYPERLINK_locator      Locator
+      ${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMAmountTEXTBOX_locator}      Load Excel Data    Objects    Transfer Funds-Transfer FundsSCREENTransfer FundsFORMAmountTEXTBOX_locator      Locator
+      ${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMFrom AccountDROPDOWN_locator}      Load Excel Data    Objects    Transfer Funds-Transfer FundsSCREENTransfer FundsFORMFrom AccountDROPDOWN_locator      Locator
+      ${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMTo AccountDROPDOWN_locator}      Load Excel Data    Objects    Transfer Funds-Transfer FundsSCREENTransfer FundsFORMTo AccountDROPDOWN_locator      Locator
+      ${Transfer Funds-Transfer FundsSCREENTRANSFERBUTTON_locator}      Load Excel Data    Objects    Transfer Funds-Transfer FundsSCREENTRANSFERBUTTON_locator      Locator
+
+
+
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENTransfer FundsHYPERLINK_locator}     
+    Wait Until Element Is Visible 		${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMAmountTEXTBOX_locator}     5
+    Input Text		${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMAmountTEXTBOX_locator}     ${Amount TEXTBOX}
+    Wait Until Element Is Visible 		${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMFrom AccountDROPDOWN_locator}     5
+    Select From List By Label		${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMFrom AccountDROPDOWN_locator}     ${From Account DROPDOWN}
+    Wait Until Element Is Visible 		${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMTo AccountDROPDOWN_locator}     5
+    Select From List By Label		${Transfer Funds-Transfer FundsSCREENTransfer FundsFORMTo AccountDROPDOWN_locator}     ${To Account DROPDOWN}
+    Wait Until Element Is Visible 		${Transfer Funds-Transfer FundsSCREENTRANSFERBUTTON_locator}     5
+    Click Element		${Transfer Funds-Transfer FundsSCREENTRANSFERBUTTON_locator}     
+
+
+
+Successfull Transfer Parabank - 
+    [Arguments]    ${Bill Payment FIELD Verification}    
+      ${VERIFY Bill Payment Complete-Bill Payment FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Bill Payment Complete-Bill Payment FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Bill Payment Complete-Bill Payment FIELD [Verification]_locator}     ${Bill Payment FIELD Verification}Bill Payment FIELD [Verification]     
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'Successfull Transfer' / Action #2
+
+
+
+Find Transaction Parabank - 
+    [Arguments]    ${Select an account DROPDOWN}    
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENFind TransactionsHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENFind TransactionsHYPERLINK_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENTransactionFORMSelect an accountDROPDOWN_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransactionFORMSelect an accountDROPDOWN_locator      Locator
+
+
+
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENFind TransactionsHYPERLINK_locator}     
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransactionFORMSelect an accountDROPDOWN_locator}     5
+    Select From List By Label		${Find Transactions-Find TransactionsSCREENTransactionFORMSelect an accountDROPDOWN_locator}     ${Select an account DROPDOWN}
+
+
+
+Transaction Date Range Parabank - 
+    [Arguments]    ${Between TEXTBOX}    ${And TEXTBOX}    ${Error FIELD Verification}    
+      ${Find Transactions-Find TransactionsSCREENDate RangeFORMBetweenTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENDate RangeFORMBetweenTEXTBOX_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENDate RangeFORMAndTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENDate RangeFORMAndTEXTBOX_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENDate RangeFORMFind TransactionsBUTTON_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENDate RangeFORMFind TransactionsBUTTON_locator      Locator
+      ${VERIFY Transaction Error -Error FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Error -Error FIELD [Verification]_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENDate RangeFORMBetweenTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENDate RangeFORMBetweenTEXTBOX_locator}     ${Between TEXTBOX}
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENDate RangeFORMAndTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENDate RangeFORMAndTEXTBOX_locator}     ${And TEXTBOX}
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENDate RangeFORMFind TransactionsBUTTON_locator}     5
+    Click Element		${Find Transactions-Find TransactionsSCREENDate RangeFORMFind TransactionsBUTTON_locator}     
+    Element Should Contain		${VERIFY Transaction Error -Error FIELD [Verification]_locator}     ${Error FIELD Verification}Error FIELD [Verification]     
+    #Req: From date and To date are required
+
+
+
+Transaction by ID Parabank - 
+    [Arguments]    ${Find By Transaction ID TEXTBOX}    ${Error FIELD Verification}    
+      ${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind By Transaction IDTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransaction IDFORMFind By Transaction IDTEXTBOX_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind TransactionsBUTTON_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransaction IDFORMFind TransactionsBUTTON_locator      Locator
+      ${VERIFY Transaction Error -Error FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Error -Error FIELD [Verification]_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind By Transaction IDTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind By Transaction IDTEXTBOX_locator}     ${Find By Transaction ID TEXTBOX}
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind TransactionsBUTTON_locator}     5
+    Click Element		${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind TransactionsBUTTON_locator}     
+    Element Should Contain		${VERIFY Transaction Error -Error FIELD [Verification]_locator}     ${Error FIELD Verification}Error FIELD [Verification]     
+    #Req:Transaction ID is required
+
+
+
+Transaction By Date Parabank - 
+    [Arguments]    ${Find By Date TEXTBOX}    ${Error FIELD Verification}    
+      ${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind By DateTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind By DateTEXTBOX_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind TransactionsBUTTON_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind TransactionsBUTTON_locator      Locator
+      ${VERIFY Transaction Error -Error FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Error -Error FIELD [Verification]_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind By DateTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind By DateTEXTBOX_locator}     ${Find By Date TEXTBOX}
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind TransactionsBUTTON_locator}     5
+    Click Element		${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind TransactionsBUTTON_locator}     
+    Element Should Contain		${VERIFY Transaction Error -Error FIELD [Verification]_locator}     ${Error FIELD Verification}Error FIELD [Verification]     
+    #Req:Date is required
+
+
+
+Find by Amount Parabank - 
+    [Arguments]    ${Find By Amount TEXTBOX}    
+      ${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind By AmountTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENFind By AmountFORMFind By AmountTEXTBOX_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind By AmountTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind By AmountTEXTBOX_locator}     ${Find By Amount TEXTBOX}
+
+
+
+Transaction by Amount Parabank - 
+    [Arguments]    ${Error FIELD Verification}    
+      ${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind TransactionsBUTTON_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENFind By AmountFORMFind TransactionsBUTTON_locator      Locator
+      ${VERIFY Transaction Error -Error FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Error -Error FIELD [Verification]_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind TransactionsBUTTON_locator}     5
+    Click Element		${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind TransactionsBUTTON_locator}     
+    Element Should Contain		${VERIFY Transaction Error -Error FIELD [Verification]_locator}     ${Error FIELD Verification}Error FIELD [Verification]     
+    #Req:Amount is Required
+
+
+
+Update Contact info Parabank - 
+    [Arguments]    ${First Name TEXTBOX Verification}    ${Last Name TEXTBOX Verification}    ${Address TEXTBOX Verification}    ${City TEXTBOX Verification}    ${State TEXTBOX Verification}    ${Zip Code TEXTBOX Verification}    ${Phone TEXTBOX Verification}    ${First Name TEXTBOX}    ${Last Name TEXTBOX}    ${Address TEXTBOX}    ${City TEXTBOX}    ${State TEXTBOX}    ${Zip Code TEXTBOX}    ${Phone TEXTBOX}    
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENUpdate Contact InfoHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENUpdate Contact InfoHYPERLINK_locator      Locator
+      ${Update Profile-Update ProfileSCREENProfileFORMFirst NameTEXTBOX_locator}      Load Excel Data    Objects    Update Profile-Update ProfileSCREENProfileFORMFirst NameTEXTBOX_locator      Locator
+      ${Update Profile-Update ProfileSCREENProfileFORMLast NameTEXTBOX_locator}      Load Excel Data    Objects    Update Profile-Update ProfileSCREENProfileFORMLast NameTEXTBOX_locator      Locator
+      ${Update Profile-Update ProfileSCREENProfileFORMAddressTEXTBOX_locator}      Load Excel Data    Objects    Update Profile-Update ProfileSCREENProfileFORMAddressTEXTBOX_locator      Locator
+      ${Update Profile-Update ProfileSCREENProfileFORMCityTEXTBOX_locator}      Load Excel Data    Objects    Update Profile-Update ProfileSCREENProfileFORMCityTEXTBOX_locator      Locator
+      ${Update Profile-Update ProfileSCREENProfileFORMStateTEXTBOX_locator}      Load Excel Data    Objects    Update Profile-Update ProfileSCREENProfileFORMStateTEXTBOX_locator      Locator
+      ${Update Profile-Update ProfileSCREENProfileFORMZip CodeTEXTBOX_locator}      Load Excel Data    Objects    Update Profile-Update ProfileSCREENProfileFORMZip CodeTEXTBOX_locator      Locator
+      ${Update Profile-Update ProfileSCREENProfileFORMPhoneTEXTBOX_locator}      Load Excel Data    Objects    Update Profile-Update ProfileSCREENProfileFORMPhoneTEXTBOX_locator      Locator
+      ${Update Profile-Update ProfileSCREENUPDATE PROFILEBUTTON_locator}      Load Excel Data    Objects    Update Profile-Update ProfileSCREENUPDATE PROFILEBUTTON_locator      Locator
+
+
+
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENUpdate Contact InfoHYPERLINK_locator}     
+    Page Should Contain		${First Name TEXTBOX Verification}
+    Page Should Contain		${Last Name TEXTBOX Verification}
+    Page Should Contain		${Address TEXTBOX Verification}
+    Page Should Contain		${City TEXTBOX Verification}
+    Page Should Contain		${State TEXTBOX Verification}
+    Page Should Contain		${Zip Code TEXTBOX Verification}
+    Page Should Contain		${Phone TEXTBOX Verification}
+    Wait Until Element Is Visible 		${Update Profile-Update ProfileSCREENProfileFORMFirst NameTEXTBOX_locator}     5
+    Input Text		${Update Profile-Update ProfileSCREENProfileFORMFirst NameTEXTBOX_locator}     ${First Name TEXTBOX}
+    Wait Until Element Is Visible 		${Update Profile-Update ProfileSCREENProfileFORMLast NameTEXTBOX_locator}     5
+    Input Text		${Update Profile-Update ProfileSCREENProfileFORMLast NameTEXTBOX_locator}     ${Last Name TEXTBOX}
+    Wait Until Element Is Visible 		${Update Profile-Update ProfileSCREENProfileFORMAddressTEXTBOX_locator}     5
+    Input Text		${Update Profile-Update ProfileSCREENProfileFORMAddressTEXTBOX_locator}     ${Address TEXTBOX}
+    Wait Until Element Is Visible 		${Update Profile-Update ProfileSCREENProfileFORMCityTEXTBOX_locator}     5
+    Input Text		${Update Profile-Update ProfileSCREENProfileFORMCityTEXTBOX_locator}     ${City TEXTBOX}
+    Wait Until Element Is Visible 		${Update Profile-Update ProfileSCREENProfileFORMStateTEXTBOX_locator}     5
+    Input Text		${Update Profile-Update ProfileSCREENProfileFORMStateTEXTBOX_locator}     ${State TEXTBOX}
+    Wait Until Element Is Visible 		${Update Profile-Update ProfileSCREENProfileFORMZip CodeTEXTBOX_locator}     5
+    Input Text		${Update Profile-Update ProfileSCREENProfileFORMZip CodeTEXTBOX_locator}     ${Zip Code TEXTBOX}
+    Wait Until Element Is Visible 		${Update Profile-Update ProfileSCREENProfileFORMPhoneTEXTBOX_locator}     5
+    Input Text		${Update Profile-Update ProfileSCREENProfileFORMPhoneTEXTBOX_locator}     ${Phone TEXTBOX}
+    Wait Until Element Is Visible 		${Update Profile-Update ProfileSCREENUPDATE PROFILEBUTTON_locator}     5
+    Click Element		${Update Profile-Update ProfileSCREENUPDATE PROFILEBUTTON_locator}     
+
+
+
+Update Contact Parabank - 
+    [Arguments]    ${message FIELD Verification}    
+      ${VERIFY Profile Updated-message FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Profile Updated-message FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Profile Updated-message FIELD [Verification]_locator}     ${message FIELD Verification}message FIELD [Verification]     
+    Element Should Contain		${VERIFY Profile Updated-message FIELD [Verification]_locator}     ${message FIELD Verification}message FIELD [Verification]     
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'Update Contact' / Action #2
+
+	# No CITA mapping found for: Profile Updated #pv#You updated XXX
+	# No CITA mapping found for: YYYY have been added to the system#pv##newparam#
+	# No CITA mapping found for: YYYY have been added to the system#pv#
+
+
+Logout Parabank - 
+
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENLog OutHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENLog OutHYPERLINK_locator      Locator
+
+
+
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENLog OutHYPERLINK_locator}     
+
+
+
+Request Loan Parabank - 
+    [Arguments]    ${From Account DROPDOWN Verification}    
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENRequest LoanHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENRequest LoanHYPERLINK_locator      Locator
+      ${Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator}      Load Excel Data    Objects    Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator      Locator
+
+
+
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENRequest LoanHYPERLINK_locator}     
+    Element Should Contain		${Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator}     ${From Account DROPDOWN Verification}From Account     
+
+
+
+Loan Parabank - 
+    [Arguments]    ${Loan Amount TEXTBOX}    ${Down Payment TEXTBOX}    ${From Account DROPDOWN}    
+      ${Apply for a Loan-Apply for a LoanSCREENLoanFORMLoan AmountTEXTBOX_locator}      Load Excel Data    Objects    Apply for a Loan-Apply for a LoanSCREENLoanFORMLoan AmountTEXTBOX_locator      Locator
+      ${Apply for a Loan-Apply for a LoanSCREENLoanFORMDown PaymentTEXTBOX_locator}      Load Excel Data    Objects    Apply for a Loan-Apply for a LoanSCREENLoanFORMDown PaymentTEXTBOX_locator      Locator
+      ${Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator}      Load Excel Data    Objects    Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator      Locator
+      ${Apply for a Loan-Apply for a LoanSCREENApply NowBUTTON_locator}      Load Excel Data    Objects    Apply for a Loan-Apply for a LoanSCREENApply NowBUTTON_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Apply for a Loan-Apply for a LoanSCREENLoanFORMLoan AmountTEXTBOX_locator}     5
+    Input Text		${Apply for a Loan-Apply for a LoanSCREENLoanFORMLoan AmountTEXTBOX_locator}     ${Loan Amount TEXTBOX}
+    Wait Until Element Is Visible 		${Apply for a Loan-Apply for a LoanSCREENLoanFORMDown PaymentTEXTBOX_locator}     5
+    Input Text		${Apply for a Loan-Apply for a LoanSCREENLoanFORMDown PaymentTEXTBOX_locator}     ${Down Payment TEXTBOX}
+    Wait Until Element Is Visible 		${Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator}     5
+    Select From List By Label		${Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator}     ${From Account DROPDOWN}
+    Wait Until Element Is Visible 		${Apply for a Loan-Apply for a LoanSCREENApply NowBUTTON_locator}     5
+    Click Element		${Apply for a Loan-Apply for a LoanSCREENApply NowBUTTON_locator}     
+
+
+
+Request Loan2 Parabank - 
+    [Arguments]    ${Loan Provider FIELD Verification#pn##pv#Loan Provider#pv##newparam# #pn#Date FIELD Verification#pn##pv#Current Date#pv##newparam# #pn#Status FIELD Verification#pn##pv#Approved#pv##newparam# #pn#message FIELD Verification}    ${Loan Provider FIELD Verification}    ${Date FIELD Verification}    ${Status FIELD Verification}    ${message FIELD Verification}    ${Account Number FIELD Verification}    ${Account1 FIELD Verification}    ${Balance of Account1 FIELD Verification}    ${Available Amount of Account 1 FIELD Verification}    ${Account2 FIELD Verification}    ${Balance Account2 FIELD Verification}    ${Avilable Amount of Account2 FIELD Verification}    ${Total Amount FIELD Verification}    
+      ${VERIFY Loan Request Processed-Loan Provider FIELD [Verification]#pn##pv#Loan Provider#pv##newparam# #pn#Date FIELD [Verification]#pn##pv#Current Date#pv##newparam# #pn#Status FIELD [Verification]#pn##pv#Approved#pv##newparam# #pn#message FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Loan Request Processed-Loan Provider FIELD [Verification]#pn##pv#Loan Provider#pv##newparam# #pn#Date FIELD [Verification]#pn##pv#Current Date#pv##newparam# #pn#Status FIELD [Verification]#pn##pv#Approved#pv##newparam# #pn#message FIELD [Verification]_locator      Locator
+      ${VERIFY Loan Request Processed-Loan Provider FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Loan Request Processed-Loan Provider FIELD [Verification]_locator      Locator
+      ${VERIFY Loan Request Processed-Date FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Loan Request Processed-Date FIELD [Verification]_locator      Locator
+      ${VERIFY Loan Request Processed-Status FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Loan Request Processed-Status FIELD [Verification]_locator      Locator
+      ${VERIFY Loan Request Processed-message FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Loan Request Processed-message FIELD [Verification]_locator      Locator
+      ${VERIFY Loan Request Processed-loanapproved#newparam#_locator}      Load Excel Data    Objects    VERIFY Loan Request Processed-loanapproved#newparam#_locator      Locator
+      ${VERIFY Loan Request Processed-loanapproved#pv#_locator}      Load Excel Data    Objects    VERIFY Loan Request Processed-loanapproved#pv#_locator      Locator
+      ${VERIFY Loan Request Processed-Account Number FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Loan Request Processed-Account Number FIELD [Verification]_locator      Locator
+      ${Apply for a Loan-Apply for a LoanSCREENApply for a LoanSCREENAccount OverviewHYPERLINK_locator}      Load Excel Data    Objects    Apply for a Loan-Apply for a LoanSCREENApply for a LoanSCREENAccount OverviewHYPERLINK_locator      Locator
+      ${VERIFY Account Overviews for Loan-Account1 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews for Loan-Account1 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews for Loan-Balance of Account1 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews for Loan-Balance of Account1 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews for Loan-Available Amount of Account 1 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews for Loan-Available Amount of Account 1 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews for Loan-Account2 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews for Loan-Account2 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews for Loan-Balance Account2 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews for Loan-Balance Account2 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews for Loan-Avilable Amount of Account2 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews for Loan-Avilable Amount of Account2 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews for Loan-Total Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews for Loan-Total Amount FIELD [Verification]_locator      Locator
+
+
+
+    Element Should Contain		${VERIFY Loan Request Processed-Loan Provider FIELD [Verification]#pn##pv#Loan Provider#pv##newparam# #pn#Date FIELD [Verification]#pn##pv#Current Date#pv##newparam# #pn#Status FIELD [Verification]#pn##pv#Approved#pv##newparam# #pn#message FIELD [Verification]_locator}     ${Loan Provider FIELD Verification#pn##pv#Loan Provider#pv##newparam# #pn#Date FIELD Verification#pn##pv#Current Date#pv##newparam# #pn#Status FIELD Verification#pn##pv#Approved#pv##newparam# #pn#message FIELD Verification}Loan Provider FIELD [Verification]#pn##pv#Loan Provider#pv##newparam# #pn#Date FIELD [Verification]#pn##pv#Current Date#pv##newparam# #pn#Status FIELD [Verification]#pn##pv#Approved#pv##newparam# #pn#message FIELD [Verification]     
+    Element Should Contain		${VERIFY Loan Request Processed-Loan Provider FIELD [Verification]_locator}     ${Loan Provider FIELD Verification}Loan Provider FIELD [Verification]     
+    Element Should Contain		${VERIFY Loan Request Processed-Date FIELD [Verification]_locator}     ${Date FIELD Verification}Date FIELD [Verification]     
+    Element Should Contain		${VERIFY Loan Request Processed-Status FIELD [Verification]_locator}     ${Status FIELD Verification}Status FIELD [Verification]     
+    Element Should Contain		${VERIFY Loan Request Processed-message FIELD [Verification]_locator}     ${message FIELD Verification}message FIELD [Verification]     
+    Page Should Contain Element		${Account Number FIELD Verification}
+    Page Should Contain Element		
+    Page Should Contain Element		${Account Number FIELD Verification}
+    Click Element		${Apply for a Loan-Apply for a LoanSCREENApply for a LoanSCREENAccount OverviewHYPERLINK_locator}     
+    Element Should Contain		${VERIFY Account Overviews for Loan-Account1 FIELD [Verification]_locator}     ${Account1 FIELD Verification}Account1 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews for Loan-Balance of Account1 FIELD [Verification]_locator}     ${Balance of Account1 FIELD Verification}Balance of Account1 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews for Loan-Available Amount of Account 1 FIELD [Verification]_locator}     ${Available Amount of Account 1 FIELD Verification}Available Amount of Account 1 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews for Loan-Account2 FIELD [Verification]_locator}     ${Account2 FIELD Verification}Account2 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews for Loan-Balance Account2 FIELD [Verification]_locator}     ${Balance Account2 FIELD Verification}Balance Account2 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews for Loan-Avilable Amount of Account2 FIELD [Verification]_locator}     ${Avilable Amount of Account2 FIELD Verification}Avilable Amount of Account2 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews for Loan-Total Amount FIELD [Verification]_locator}     ${Total Amount FIELD Verification}Total Amount FIELD [Verification]     
+
+	# No CITA mapping found for: Loan Request Processed Congratulations
+	# No CITA mapping found for: #pv#Congratulations
+	# No CITA mapping found for: your loan has been approved#newparam#
+	# No CITA mapping found for: your loan has been approved#pv#
+
+
+Transaction Date Range Parabank -  1
+    [Arguments]    ${Between TEXTBOX}    ${And TEXTBOX}    ${Date TABLE CELL Verification}    ${Transaction TABLE CELL Verification}    ${Debit TABLE CELL Verification}    ${Credit TABLE CELL Verification}    ${Click FIELD}    ${Transaction ID FIELD Verification}    ${Date FIELD Verification}    ${Description FIELD Verification}    ${Type FIELD Verification}    ${Amount FIELD Verification}    
+      ${Find Transactions-Find TransactionsSCREENDate RangeFORMBetweenTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENDate RangeFORMBetweenTEXTBOX_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENDate RangeFORMAndTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENDate RangeFORMAndTEXTBOX_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENDate RangeFORMFind TransactionsBUTTON_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENDate RangeFORMFind TransactionsBUTTON_locator      Locator
+      ${Transaction Result-Transaction ResultSCREENResultTABLE_locator}      Load Excel Data    Objects    Transaction Result-Transaction ResultSCREENResultTABLE_locator      Locator
+      ${PERFORM Click Transaction-Transaction_locator}      Load Excel Data    Objects    PERFORM Click Transaction-Transaction_locator      Locator
+      ${VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Date FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Date FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Description FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Description FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Type FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Type FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Amount FIELD [Verification]_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENDate RangeFORMBetweenTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENDate RangeFORMBetweenTEXTBOX_locator}     ${Between TEXTBOX}
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENDate RangeFORMAndTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENDate RangeFORMAndTEXTBOX_locator}     ${And TEXTBOX}
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENDate RangeFORMFind TransactionsBUTTON_locator}     5
+    Click Element		${Find Transactions-Find TransactionsSCREENDate RangeFORMFind TransactionsBUTTON_locator}     
+    Page Should Contain		${Date TABLE CELL Verification}
+    Page Should Contain		${Transaction TABLE CELL Verification}
+    Page Should Contain		${Debit TABLE CELL Verification}
+    Page Should Contain		${Credit TABLE CELL Verification}
+    Click Element		${PERFORM Click Transaction-Transaction_locator}     ${Click FIELD}
+    Element Should Contain		${VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator}     ${Transaction ID FIELD Verification}Transaction ID FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Date FIELD [Verification]_locator}     ${Date FIELD Verification}Date FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Description FIELD [Verification]_locator}     ${Description FIELD Verification}Description FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Type FIELD [Verification]_locator}     ${Type FIELD Verification}Type FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Amount FIELD [Verification]_locator}     ${Amount FIELD Verification}Amount FIELD [Verification]     
+    #Req:Find Transaction by Date Range
+
+
+
+Transaction by ID Parabank -  1
+    [Arguments]    ${Find By Transaction ID TEXTBOX}    ${Date TABLE CELL Verification}    ${Transaction TABLE CELL Verification}    ${Debit TABLE CELL Verification}    ${Credit TABLE CELL Verification}    ${Click FIELD}    ${Transaction ID FIELD Verification}    ${Date FIELD Verification}    ${Description FIELD Verification}    ${Type FIELD Verification}    ${Amount FIELD Verification}    
+      ${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind By Transaction IDTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransaction IDFORMFind By Transaction IDTEXTBOX_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind TransactionsBUTTON_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransaction IDFORMFind TransactionsBUTTON_locator      Locator
+      ${Transaction Result-Transaction ResultSCREENResultTABLE_locator}      Load Excel Data    Objects    Transaction Result-Transaction ResultSCREENResultTABLE_locator      Locator
+      ${PERFORM Click Transaction-Transaction_locator}      Load Excel Data    Objects    PERFORM Click Transaction-Transaction_locator      Locator
+      ${VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Date FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Date FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Description FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Description FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Type FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Type FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Amount FIELD [Verification]_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind By Transaction IDTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind By Transaction IDTEXTBOX_locator}     ${Find By Transaction ID TEXTBOX}
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind TransactionsBUTTON_locator}     5
+    Click Element		${Find Transactions-Find TransactionsSCREENTransaction IDFORMFind TransactionsBUTTON_locator}     
+    Page Should Contain		${Date TABLE CELL Verification}
+    Page Should Contain		${Transaction TABLE CELL Verification}
+    Page Should Contain		${Debit TABLE CELL Verification}
+    Page Should Contain		${Credit TABLE CELL Verification}
+    Click Element		${PERFORM Click Transaction-Transaction_locator}     ${Click FIELD}
+    Element Should Contain		${VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator}     ${Transaction ID FIELD Verification}Transaction ID FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Date FIELD [Verification]_locator}     ${Date FIELD Verification}Date FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Description FIELD [Verification]_locator}     ${Description FIELD Verification}Description FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Type FIELD [Verification]_locator}     ${Type FIELD Verification}Type FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Amount FIELD [Verification]_locator}     ${Amount FIELD Verification}Amount FIELD [Verification]     
+    #Req:Find Transaction by ID
+
+
+
+Transaction By Date Parabank -  1
+    [Arguments]    ${Find By Date TEXTBOX}    ${Date TABLE CELL Verification}    ${Transaction TABLE CELL Verification}    ${Debit TABLE CELL Verification}    ${Credit TABLE CELL Verification}    ${Date 1 TABLE CELL Verification}    ${Transaction 1 TABLE CELL Verification}    ${Debit 1 TABLE CELL Verification}    ${Credit 1 TABLE CELL Verification}    ${Click FIELD}    ${Transaction ID FIELD Verification}    ${Date FIELD Verification}    ${Description FIELD Verification}    ${Type FIELD Verification}    ${Amount FIELD Verification}    
+      ${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind By DateTEXTBOX_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind By DateTEXTBOX_locator      Locator
+      ${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind TransactionsBUTTON_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind TransactionsBUTTON_locator      Locator
+      ${Transaction Result-Transaction ResultSCREENResultTABLE_locator}      Load Excel Data    Objects    Transaction Result-Transaction ResultSCREENResultTABLE_locator      Locator
+      ${PERFORM Click Transaction-Transaction_locator}      Load Excel Data    Objects    PERFORM Click Transaction-Transaction_locator      Locator
+      ${VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Date FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Date FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Description FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Description FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Type FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Type FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Amount FIELD [Verification]_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind By DateTEXTBOX_locator}     5
+    Input Text		${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind By DateTEXTBOX_locator}     ${Find By Date TEXTBOX}
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind TransactionsBUTTON_locator}     5
+    Click Element		${Find Transactions-Find TransactionsSCREENTransaction By DateFORMFind TransactionsBUTTON_locator}     
+    Page Should Contain		${Date TABLE CELL Verification}
+    Page Should Contain		${Transaction TABLE CELL Verification}
+    Page Should Contain		${Debit TABLE CELL Verification}
+    Page Should Contain		${Credit TABLE CELL Verification}
+    Page Should Contain		${Date 1 TABLE CELL Verification}
+    Page Should Contain		${Transaction 1 TABLE CELL Verification}
+    Page Should Contain		${Debit 1 TABLE CELL Verification}
+    Page Should Contain		${Credit 1 TABLE CELL Verification}
+    Click Element		${PERFORM Click Transaction-Transaction_locator}     ${Click FIELD}
+    Element Should Contain		${VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator}     ${Transaction ID FIELD Verification}Transaction ID FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Date FIELD [Verification]_locator}     ${Date FIELD Verification}Date FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Description FIELD [Verification]_locator}     ${Description FIELD Verification}Description FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Type FIELD [Verification]_locator}     ${Type FIELD Verification}Type FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Amount FIELD [Verification]_locator}     ${Amount FIELD Verification}Amount FIELD [Verification]     
+    #Req:Find Transaction by Date
+
+
+
+Transaction by Amount Parabank -  1
+    [Arguments]    ${Date TABLE CELL Verification}    ${Transaction TABLE CELL Verification}    ${Debit TABLE CELL Verification}    ${Credit TABLE CELL Verification}    ${Click FIELD}    ${Transaction ID FIELD Verification}    ${Date FIELD Verification}    ${Description FIELD Verification}    ${Type FIELD Verification}    ${Amount FIELD Verification}    
+      ${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind TransactionsBUTTON_locator}      Load Excel Data    Objects    Find Transactions-Find TransactionsSCREENFind By AmountFORMFind TransactionsBUTTON_locator      Locator
+      ${Transaction Result-Transaction ResultSCREENResultTABLE_locator}      Load Excel Data    Objects    Transaction Result-Transaction ResultSCREENResultTABLE_locator      Locator
+      ${PERFORM Click Transaction-Transaction_locator}      Load Excel Data    Objects    PERFORM Click Transaction-Transaction_locator      Locator
+      ${VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Date FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Date FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Description FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Description FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Type FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Type FIELD [Verification]_locator      Locator
+      ${VERIFY Transaction Details-Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Transaction Details-Amount FIELD [Verification]_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind TransactionsBUTTON_locator}     5
+    Click Element		${Find Transactions-Find TransactionsSCREENFind By AmountFORMFind TransactionsBUTTON_locator}     
+    Page Should Contain		${Date TABLE CELL Verification}
+    Page Should Contain		${Transaction TABLE CELL Verification}
+    Page Should Contain		${Debit TABLE CELL Verification}
+    Page Should Contain		${Credit TABLE CELL Verification}
+    Click Element		${PERFORM Click Transaction-Transaction_locator}     ${Click FIELD}
+    Element Should Contain		${VERIFY Transaction Details-Transaction ID FIELD [Verification]_locator}     ${Transaction ID FIELD Verification}Transaction ID FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Date FIELD [Verification]_locator}     ${Date FIELD Verification}Date FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Description FIELD [Verification]_locator}     ${Description FIELD Verification}Description FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Type FIELD [Verification]_locator}     ${Type FIELD Verification}Type FIELD [Verification]     
+    Element Should Contain		${VERIFY Transaction Details-Amount FIELD [Verification]_locator}     ${Amount FIELD Verification}Amount FIELD [Verification]     
+    #Req:Find Transaction by Amount
+
+
+
+Open New Account Parabank - 
+    [Arguments]    ${Account Type DROPDOWN}    ${Existing Account DROPDOWN}    
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENOpen New AccountHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENOpen New AccountHYPERLINK_locator      Locator
+      ${Open New Account-Open New AccountSCREENNew AccountFORMAccount TypeDROPDOWN_locator}      Load Excel Data    Objects    Open New Account-Open New AccountSCREENNew AccountFORMAccount TypeDROPDOWN_locator      Locator
+      ${Open New Account-Open New AccountSCREENNew AccountFORMExisting AccountDROPDOWN_locator}      Load Excel Data    Objects    Open New Account-Open New AccountSCREENNew AccountFORMExisting AccountDROPDOWN_locator      Locator
+
+
+
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENOpen New AccountHYPERLINK_locator}     
+    Wait Until Element Is Visible 		${Open New Account-Open New AccountSCREENNew AccountFORMAccount TypeDROPDOWN_locator}     5
+    Select From List By Label		${Open New Account-Open New AccountSCREENNew AccountFORMAccount TypeDROPDOWN_locator}     ${Account Type DROPDOWN}
+    Wait Until Element Is Visible 		${Open New Account-Open New AccountSCREENNew AccountFORMExisting AccountDROPDOWN_locator}     5
+    Select From List By Label		${Open New Account-Open New AccountSCREENNew AccountFORMExisting AccountDROPDOWN_locator}     ${Existing Account DROPDOWN}
+
+
+
+New Account Opened Parabank - 
+    [Arguments]    ${message FIELD Verification}    ${Account Number FIELD Verification}    ${Account1 FIELD Verification#pn##pv#Account Number1#pv##newparam# #pn#Balance of Account1 FIELD Verification#pn##pv#Actual Balance Amount- New Account intialize Amount#pv##newparam# #pn#Available Amount of Account 1 FIELD Verification#pn##pv#Available Amount in Account1#pv##newparam# #pn#Account2 FIELD Verification#pn##pv#Account Number2#pv##newparam# #pn#Balance Account2 FIELD Verification#pn##pv#New Account Intialize Amount#pv##newparam# #pn#Avilable Amount of Account2 FIELD Verification#pn##pv#Available Amount#pv##newparam# #pn#Total Amount FIELD Verification}    ${Account1 FIELD Verification}    ${Balance of Account1 FIELD Verification}    ${Available Amount of Account 1 FIELD Verification}    ${Account2 FIELD Verification}    ${Balance Account2 FIELD Verification}    ${Avilable Amount of Account2 FIELD Verification}    ${Total Amount FIELD Verification}    ${From Account DROPDOWN Verification}    
+      ${Open New Account-Open New AccountSCREENOpen New AccountBUTTON_locator}      Load Excel Data    Objects    Open New Account-Open New AccountSCREENOpen New AccountBUTTON_locator      Locator
+      ${VERIFY New Account-message FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY New Account-message FIELD [Verification]_locator      Locator
+      ${VERIFY New Account-Account Number FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY New Account-Account Number FIELD [Verification]_locator      Locator
+      ${Open New Account-Open New AccountSCREENOpen New AccountSCREENAccount OverviewHYPERLINK_locator}      Load Excel Data    Objects    Open New Account-Open New AccountSCREENOpen New AccountSCREENAccount OverviewHYPERLINK_locator      Locator
+      ${VERIFY Account Overviews-Account1 FIELD [Verification]#pn##pv#Account Number1#pv##newparam# #pn#Balance of Account1 FIELD [Verification]#pn##pv#Actual Balance Amount- New Account intialize Amount#pv##newparam# #pn#Available Amount of Account 1 FIELD [Verification]#pn##pv#Available Amount in Account1#pv##newparam# #pn#Account2 FIELD [Verification]#pn##pv#Account Number2#pv##newparam# #pn#Balance Account2 FIELD [Verification]#pn##pv#New Account Intialize Amount#pv##newparam# #pn#Avilable Amount of Account2 FIELD [Verification]#pn##pv#Available Amount#pv##newparam# #pn#Total Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews-Account1 FIELD [Verification]#pn##pv#Account Number1#pv##newparam# #pn#Balance of Account1 FIELD [Verification]#pn##pv#Actual Balance Amount- New Account intialize Amount#pv##newparam# #pn#Available Amount of Account 1 FIELD [Verification]#pn##pv#Available Amount in Account1#pv##newparam# #pn#Account2 FIELD [Verification]#pn##pv#Account Number2#pv##newparam# #pn#Balance Account2 FIELD [Verification]#pn##pv#New Account Intialize Amount#pv##newparam# #pn#Avilable Amount of Account2 FIELD [Verification]#pn##pv#Available Amount#pv##newparam# #pn#Total Amount FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews-Account1 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews-Account1 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews-Balance of Account1 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews-Balance of Account1 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews-Available Amount of Account 1 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews-Available Amount of Account 1 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews-Account2 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews-Account2 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews-Balance Account2 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews-Balance Account2 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews-Avilable Amount of Account2 FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews-Avilable Amount of Account2 FIELD [Verification]_locator      Locator
+      ${VERIFY Account Overviews-Total Amount FIELD [Verification]_locator}      Load Excel Data    Objects    VERIFY Account Overviews-Total Amount FIELD [Verification]_locator      Locator
+      ${Account Services-Account ServicesSCREENAccount ServicesSCREENRequest LoanHYPERLINK_locator}      Load Excel Data    Objects    Account Services-Account ServicesSCREENAccount ServicesSCREENRequest LoanHYPERLINK_locator      Locator
+      ${Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator}      Load Excel Data    Objects    Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator      Locator
+
+
+
+    Wait Until Element Is Visible 		${Open New Account-Open New AccountSCREENOpen New AccountBUTTON_locator}     5
+    Click Element		${Open New Account-Open New AccountSCREENOpen New AccountBUTTON_locator}     
+    Element Should Contain		${VERIFY New Account-message FIELD [Verification]_locator}     ${message FIELD Verification}message FIELD [Verification]     
+    Element Should Contain		${VERIFY New Account-Account Number FIELD [Verification]_locator}     ${Account Number FIELD Verification}Account Number FIELD [Verification]     
+    Element Should Contain		${VERIFY New Account-Account Number FIELD [Verification]_locator}     ${Account Number FIELD Verification}Account Number FIELD [Verification]     
+    Click Element		${Open New Account-Open New AccountSCREENOpen New AccountSCREENAccount OverviewHYPERLINK_locator}     
+    Element Should Contain		${VERIFY Account Overviews-Account1 FIELD [Verification]#pn##pv#Account Number1#pv##newparam# #pn#Balance of Account1 FIELD [Verification]#pn##pv#Actual Balance Amount- New Account intialize Amount#pv##newparam# #pn#Available Amount of Account 1 FIELD [Verification]#pn##pv#Available Amount in Account1#pv##newparam# #pn#Account2 FIELD [Verification]#pn##pv#Account Number2#pv##newparam# #pn#Balance Account2 FIELD [Verification]#pn##pv#New Account Intialize Amount#pv##newparam# #pn#Avilable Amount of Account2 FIELD [Verification]#pn##pv#Available Amount#pv##newparam# #pn#Total Amount FIELD [Verification]_locator}     ${Account1 FIELD Verification#pn##pv#Account Number1#pv##newparam# #pn#Balance of Account1 FIELD Verification#pn##pv#Actual Balance Amount- New Account intialize Amount#pv##newparam# #pn#Available Amount of Account 1 FIELD Verification#pn##pv#Available Amount in Account1#pv##newparam# #pn#Account2 FIELD Verification#pn##pv#Account Number2#pv##newparam# #pn#Balance Account2 FIELD Verification#pn##pv#New Account Intialize Amount#pv##newparam# #pn#Avilable Amount of Account2 FIELD Verification#pn##pv#Available Amount#pv##newparam# #pn#Total Amount FIELD Verification}Account1 FIELD [Verification]#pn##pv#Account Number1#pv##newparam# #pn#Balance of Account1 FIELD [Verification]#pn##pv#Actual Balance Amount- New Account intialize Amount#pv##newparam# #pn#Available Amount of Account 1 FIELD [Verification]#pn##pv#Available Amount in Account1#pv##newparam# #pn#Account2 FIELD [Verification]#pn##pv#Account Number2#pv##newparam# #pn#Balance Account2 FIELD [Verification]#pn##pv#New Account Intialize Amount#pv##newparam# #pn#Avilable Amount of Account2 FIELD [Verification]#pn##pv#Available Amount#pv##newparam# #pn#Total Amount FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews-Account1 FIELD [Verification]_locator}     ${Account1 FIELD Verification}Account1 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews-Balance of Account1 FIELD [Verification]_locator}     ${Balance of Account1 FIELD Verification}Balance of Account1 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews-Available Amount of Account 1 FIELD [Verification]_locator}     ${Available Amount of Account 1 FIELD Verification}Available Amount of Account 1 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews-Account2 FIELD [Verification]_locator}     ${Account2 FIELD Verification}Account2 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews-Balance Account2 FIELD [Verification]_locator}     ${Balance Account2 FIELD Verification}Balance Account2 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews-Avilable Amount of Account2 FIELD [Verification]_locator}     ${Avilable Amount of Account2 FIELD Verification}Avilable Amount of Account2 FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews-Total Amount FIELD [Verification]_locator}     ${Total Amount FIELD Verification}Total Amount FIELD [Verification]     
+    Element Should Contain		${VERIFY Account Overviews-Total Amount FIELD [Verification]_locator}     ${Total Amount FIELD Verification}Total Amount FIELD [Verification]     
+    Click Element		${Account Services-Account ServicesSCREENAccount ServicesSCREENRequest LoanHYPERLINK_locator}     
+    Element Should Contain		${Apply for a Loan-Apply for a LoanSCREENLoanFORMFrom AccountDROPDOWN_locator}     ${From Account DROPDOWN Verification}From Account     
+
+	# No CITA mapping found for: New Account #pv#Congratulation
+	# No CITA mapping found for: Your account now is opened#newparam#
+	# No CITA mapping found for: Your account now is opened#pv#
+	# No CITA mapping found for: Account Overviews Total amount of Account1
+	# No CITA mapping found for: Account2#pv##newparam#
+	# No CITA mapping found for: #pv#Total amount of Account1
+	# No CITA mapping found for: Account2#pv#
+

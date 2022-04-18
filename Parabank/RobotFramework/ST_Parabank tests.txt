@@ -1,0 +1,171 @@
+*** Settings ***
+Documentation    WARNING! This file has been automatically generated using the Conformiq <Robot Framework Scripter> scripting backend. PLEASE DO NOT EDIT.
+Library    Selenium2Library
+Library    DateTime
+Resource          ST_Parabank keywords.txt
+Resource          Conformiq RobotFwk Utils library.txt
+
+*** Variables ***
+
+*** Test Cases ***
+Username = "invalid Username"
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       invalid Username
+    Invalid Login Parabank -        The username and password could not be verified.       The username and password could not be verified.
+    #Req:Invalid Login when user enters username which does not exist.
+Password = "invalid Password"
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        invalid Password       valid Username
+    Invalid Login Parabank -        The username and password could not be verified.       The username and password could not be verified.
+    #Req:Invalid Login when user enters username which does not exist.
+Adminstritation
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    Admin Page Parabank -        20       Intial Balance       Min Balance       [Don't care]       [Don't care]       20       Intial Balance       Min Balance       Settings saved successfully.
+    #Req:Adminstritation
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'Valid Register' / Action #2
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    REGISTER Parabank -        valid first name       valid last name       valid Address       valid city       valid state       123456       123456       SSN Number       valid username       valid password       valid password
+    Valid Register Parabank -        Account Created Successfully, you are now logged in
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'Valid Register' / Action #2
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'Invalid Register' / Action #2
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    REGISTER Parabank -        ""       ""       ""       ""       ""       0       0       ""       ""       ""       ""
+    Invalid Register Parabank -        First name is required       Last name is required       Address is required        City is required       State is required       Zip code is required       Phone number is required       SSN is required       User name is required       Password is required       Password Conformation is required
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'Invalid Register' / Action #2
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'username exist' / Action #2
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    REGISTER Parabank -        valid first name       valid last name       valid Address       valid city       valid state       12346       12346789       12456       exist username       valid password       valid password
+    name exist Parabank -        This username already exists.
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'username exist' / Action #2
+Reject non matching password
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    REGISTER Parabank -        valid first name       valid last name       valid Address       valid city       valid state       12346       12346789       12456       valid username       valid password       non matching password
+    non matching password Parabank -        Password and Confirm Password should be same       Password and Confirm Password should be same
+    #Req:Reject non matching password
+Forgot Password
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    Forgot Login info Parabank -        First Name       Last Name       Address       City       State       123456       SSN       Your login information was located successfully. You are now logged in. User Name:XXX Password:YYY
+    #Req:Forgot Password
+Accounts Overview
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Accounts Overivew Parabank -        Account Overview screen displays with Account Number,       Balance, and       Balance, and       Available Amount       Available Amount
+    #Req:Accounts Overview
+All Fileds are required and should not be empty
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Bill Pay Parabank -        ""       ""       ""       ""       ""       ""       ""       ""       ""       From Account
+    Successful Bill Payment Parabank -        All Fileds are required
+    #Req:All Fileds are required and should not be empty
+Bill Pay Amount should be less than the account balance
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Bill Pay Parabank -        Payee Name       Address       City       State       Valid ZipCode       Phone number       Account Number       Account Number       Amount greater than the account balance       From Account
+    Successful Bill Payment Parabank -        Bill Pay Amount should be less than the account balance 
+    #Req:Bill Pay Amount should be less than the account balance 
+Bill Payment Successfull and amount debit from account balance
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Bill Pay Parabank -        Payee Name       Address       City       State       Valid ZipCode       Phone number       Account Number       Account Number       Amount less than are equal to account balance       From Account
+    Successful Bill Payment Parabank -        Bill Payment to Username in the amount of $xxx from account 12345 was successful and amount $xxx should be debit from account 12345. 
+    #Req:Bill Payment Successfull and amount debit from account balance
+Account number and Verify Account number should match
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Bill Pay Parabank -        Payee Name       Address       City       State       Valid ZipCode       Phone number       Account Number       non matching Account number       Amount less than are equal to account balance       From Account
+    Successful Bill Payment Parabank -        The account numbers do not match
+    #Req:Account number and Verify Account number should match
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'Successfull Transfer' / Action #2
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Transfer funds Parabank -        Amount       From Account       To Account
+    Successfull Transfer Parabank -        Amount $XXX has been transferred from account #AAA to account #BBB. 
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'Successfull Transfer' / Action #2
+From date and To date are required
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Find Transaction Parabank -        [Don't care]
+    Transaction Date Range Parabank -        ""                From date is required. To date is required
+    #Req: From date and To date are required
+Transaction ID is required
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Find Transaction Parabank -        [Don't care]
+    Transaction by ID Parabank -                Transaction ID is required
+    #Req:Transaction ID is required
+Date is required
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Find Transaction Parabank -        [Don't care]
+    Transaction By Date Parabank -        ""       Date is required
+    #Req:Date is required
+Amount is Required
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Find Transaction Parabank -        [Don't care]
+    Find by Amount Parabank -         
+    Transaction by Amount Parabank -        Amount is required
+    #Req:Amount is Required
+Activity Diagram 'Parabank - Activity Diagram' . Activity 'Update Contact' / Action #2
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Update Contact info Parabank -        First Name       Last Name       Address       City       State       ZIP Code       Phone       [Don't care]       [Don't care]       Updated Address       [Don't care]       [Don't care]       [Don't care]       Updated Phone Number
+    Update Contact Parabank -        You updated  XXX and YYYY have been added to the system       You updated  XXX and YYYY have been added to the system
+    #Req:Activity Diagram 'Parabank - Activity Diagram' . Activity 'Update Contact' / Action #2
+    Logout Parabank - 
+Node Activity 'Request Loan'
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Request Loan Parabank -        Existing Accounts
+    Loan Parabank -        Loan Amount       Down Payment       Existing Accounts
+    Request Loan2 Parabank -        Loan Provider       Current Date       Approved       Congratulations,your loan has been approved       Your new account number:XXXX       Your new account number:XXXX       Your new account number:XXXX       Account Number       Actual Balance Amount- Loan Down Paymentt       Available Amount       Account Number       Loan Requested Amount       Available Amount       Account1+Account2
+Find Transaction by Date Range
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Find Transaction Parabank -        [Don't care]
+    Transaction Date Range Parabank -  1       From Date       To Date       Transaction Date       Transaction        Debit Amount       Credit Amount       Click on the Transaction Link       Transaction ID       Transaction Date       Transaction Description       Transaction Type       Transaction Amount
+    #Req:Find Transaction by Date Range
+Find Transaction by ID
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Find Transaction Parabank -        [Don't care]
+    Transaction by ID Parabank -  1       Transaction ID       Transaction Date       Transaction        Debit Amount       Credit Amount       Click on the Transaction Link       Transaction ID       Transaction Date       Transaction Description       Transaction Type       Transaction Amount
+    #Req:Find Transaction by ID
+Find Transaction by Date
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Find Transaction Parabank -        [Don't care]
+    Transaction By Date Parabank -  1       Date(MM-DD-YYYY)       Transaction Date       Transaction        Debit Amount       Credit Amount       Transaction Date       Transaction        Debit Amount       Credit Amount       Click on the Transaction Link       Transaction ID       Transaction Date       Transaction Description       Transaction Type       Transaction Amount
+    #Req:Find Transaction by Date
+Find Transaction by Amount
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Find Transaction Parabank -        [Don't care]
+    Find by Amount Parabank -        Amount
+    Transaction by Amount Parabank -  1       Transaction Date       Transaction        Debit Amount       Credit Amount       Click on the Transaction Link       Transaction ID       Transaction Date       Transaction Description       Transaction Type       Transaction Amount
+    #Req:Find Transaction by Amount
+Open New Account and Requesting Loan
+    Activity Node 1 Parabank -        Enter URL as http://parabank2.parasoft.com/parabank/index.htm
+    LOGIN Parabank -        valid Password       valid Username
+    Valid Login Parabank -        Account Number       Balance       Available Amount
+    Open New Account Parabank -        Savings       Existing Account
+    New Account Opened Parabank -        Congratulation,Your account now is opened       Your account Number XXXX       Your account Number XXXX       Account Number1       Actual Balance Amount- New Account intialize Amount       Available Amount in Account1       Account Number2       New Account Intialize Amount       Available Amount       Total amount of Account1 and Account2       Total amount of Account1 and Account2       Existing Accounts
+    Loan Parabank -        Loan Amount       Down Payment       Existing Accounts
+    Request Loan2 Parabank -        Loan Provider       Current Date       Approved       Congratulations,your loan has been approved       Your new account number:XXXX       Your new account number:XXXX       Your new account number:XXXX       Account Number       Actual Balance Amount- Loan Down Paymentt       Available Amount       Account Number       Loan Requested Amount       Available Amount       Account1+Account2
+    #Req:Open New Account and Requesting Loan
