@@ -40,12 +40,6 @@
             <element xmi:type="com.conformiq.creator.structure.dsl:Hyperlink" href="Parabank%20-%20Structure%20Diagram.sl#qml742a5310240446b5bf851e601cf6ed9d"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JoJcE4OoEeWaMp3LzUsxUQ" x="19" y="124"/>
           </children>
-          <children xmi:type="notation:Shape" xmi:id="_Jwg-8L8wEeyMc99CQy_N0g" type="3010" fontName="Segoe UI">
-            <children xmi:type="notation:DecorationNode" xmi:id="_Jwg-8r8wEeyMc99CQy_N0g" type="5011"/>
-            <children xmi:type="notation:DecorationNode" xmi:id="_Jwg-878wEeyMc99CQy_N0g" type="5058"/>
-            <element xmi:type="com.conformiq.creator.structure.dsl:TextBox" href="Parabank%20-%20Structure%20Diagram.sl#qml8ab113250c424d16aa600fe55b382a23"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Jwg-8b8wEeyMc99CQy_N0g" x="232" y="82"/>
-          </children>
         </children>
         <styles xmi:type="notation:DescriptionStyle" xmi:id="_xae-MYOnEeWaMp3LzUsxUQ"/>
         <styles xmi:type="notation:FontStyle" xmi:id="_xae-MoOnEeWaMp3LzUsxUQ" fontName="Segoe UI"/>
